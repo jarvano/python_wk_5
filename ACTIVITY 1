@@ -1,0 +1,48 @@
+# Base class
+class Device:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+    
+    def device_info(self):
+        return f"Device: {self.brand} {self.model}"
+
+
+# Child class (Inheritance)
+class Smartphone(Device):
+    def __init__(self, brand, model, storage, battery):
+        # Call parent constructor
+        super().__init__(brand, model)
+        self.storage = storage
+        self.__battery = battery  # Encapsulation: private attribute
+
+    # Method to show smartphone details
+    def phone_info(self):
+        return f"{self.device_info()}, Storage: {self.storage}GB, Battery: {self.__battery}mAh"
+    
+    # Encapsulated getter method
+    def get_battery(self):
+        return self.__battery
+    
+    # Polymorphism: redefining device_info
+    def device_info(self):
+        return f"Smartphone: {self.brand} {self.model}"
+
+
+# Another child class to show polymorphism
+class Tablet(Device):
+    def __init__(self, brand, model, screen_size):
+        super().__init__(brand, model)
+        self.screen_size = screen_size
+    
+    def device_info(self):  # Polymorphism
+        return f"Tablet: {self.brand} {self.model}, Screen: {self.screen_size}\""
+
+
+# ---- Example Usage ----
+phone1 = Smartphone("Samsung", "Galaxy S24", 256, 5000)
+tablet1 = Tablet("Apple", "iPad Pro", 12.9)
+
+print(phone1.phone_info())
+print("Battery capacity:", phone1.get_battery())
+print(tablet1.device_info())
